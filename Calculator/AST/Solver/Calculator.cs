@@ -17,12 +17,12 @@ namespace Calculator.AST.Solver
             _isFirstCalculating = true;
         }
 
-        public long InitCalcualtion()
+        public double InitCalcualtion()
         {
             foreach (var key in _varsCache.Keys)
                 _varsCache[key].ResetImmutability();
 
-            long result = Resolve(_node);
+            double result = Resolve(_node);
             _isFirstCalculating = false;
 
             return result;
@@ -36,10 +36,10 @@ namespace Calculator.AST.Solver
         #region Resolvers 
         // functions in the region calculate numeric value of the expression
 
-        long ResolveVar(Operand node)
+        double ResolveVar(Operand node)
         {
             string varName = node.Token.Value;
-            long num = 0;
+            double num = 0;
 
             bool isVarCached = _varsCache.ContainsKey(varName);
             bool isVarImmutable = false;
@@ -73,7 +73,7 @@ namespace Calculator.AST.Solver
                 Console.Write(string.Format("\n{0} = ", varName));
 
                 var varValue = Console.ReadLine();
-                while (!long.TryParse(varValue, out num))
+                while (!double.TryParse(varValue, out num))
                 {
                     Console.WriteLine("Incorrect input numeric value! Please fix the issue and try again.");
 
@@ -86,21 +86,21 @@ namespace Calculator.AST.Solver
             return num;
         }
 
-        long ResolveNum(Operand node)
+        double ResolveNum(Operand node)
         {
             string varValue = node.Value;
 
-            long num = Convert.ToInt64(varValue);
+            double num = Convert.ToInt64(varValue);
 
             return num;
         }
 
-        long ResolveBinaryOperator(BinaryOperator node)
+        double ResolveBinaryOperator(BinaryOperator node)
         {
             var left = Resolve(node.Left);
             var right = Resolve(node.Right);
 
-            long result = 0;
+            double result = 0;
 
             if (node.Token.Type == Token.TOKEN_TYPE.PLUS)
                 result = left + right;
@@ -111,22 +111,22 @@ namespace Calculator.AST.Solver
             else if (node.Token.Type == Token.TOKEN_TYPE.DIV)
                 result = left / right;
             else if (node.Token.Type == Token.TOKEN_TYPE.POW)
-                result = (long)Math.Pow(left, right);
+                result = Math.Pow(left, right);
 
             return result;
         }
 
-        long Resolve(Operand node)
+        double Resolve(Operand node)
         {
-            long result = 0;
+            double result = 0;
 
             if (node.Token.IsOperator())
-                result += ResolveBinaryOperator((BinaryOperator)node);
+                result = ResolveBinaryOperator((BinaryOperator)node);
             else if (node.Token.Type == Token.TOKEN_TYPE.VAR)
-                result += ResolveVar(node);
+                result = ResolveVar(node);
             else if (node.Token.Type == Token.TOKEN_TYPE.NUM)
-                result += ResolveNum(node);
-            else result += Resolve(node);
+                result = ResolveNum(node);
+            else result = Resolve(node);
 
             return result;
         }

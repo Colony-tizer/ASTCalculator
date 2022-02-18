@@ -2,10 +2,10 @@
 {
     internal class VariableInfo
     {
-        long _value;
+        double _value;
         bool _isImmutable;
 
-        public long Value
+        public double Value
         {
             get
             {
@@ -28,7 +28,7 @@
             }
         }
 
-        public VariableInfo(long value = 0, bool isImmutable = false)
+        public VariableInfo(double value = 0, bool isImmutable = false)
         {
             _value = value;
             _isImmutable = isImmutable;
