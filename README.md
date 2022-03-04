@@ -37,7 +37,7 @@ An implementation of a calculator using Abstract Syntax Tree
 - 1 **-** 1 -- *minus*
 - 1 __*__ 1 -- *multiplier*
    - 2x or x(2+1) or 1(1+1) will work too 
-- 1 **/** 1 or 1 **\** 1 -- *division*
+- 1 **/** 1 or 1 **\\** 1 -- *division*
 - 1 **^** 1 -- *power*
 
 # Feedback
