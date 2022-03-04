@@ -44,4 +44,4 @@ An implementation of a calculator using Abstract Syntax Tree
 - I will be glad any feedback concerning this implementation!
 
 # Resources
-- Thanks a lot for the explanation of Abstract Syntax Tree the person who mantains this site: https://ruslanspivak.com/lsbasi-part1/!
+- Thanks a lot for the explanation of Abstract Syntax Tree the person who maintains this site: https://ruslanspivak.com/lsbasi-part1/!
